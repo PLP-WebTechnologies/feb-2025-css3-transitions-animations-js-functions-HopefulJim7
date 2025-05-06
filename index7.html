@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Image Animation</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 150px;
+      font-style: italic;
+      font-weight: bold;
+      color: #e61c1c;
+    }
+  p {
+      font-size: 100px;
+      color: #333;
+    }
+
+    .image-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    img {
+      width: auto;
+      transition: transform 0.5s ease;
+      cursor: pointer;
+    }
+
+    @keyframes rotateAndScale {
+      0%   { transform: rotate(0deg) scale(1); }
+      50%  { transform: rotate(180deg) scale(1.2); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    .animate {
+      animation: rotateAndScale 1s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <h1>Interactive Image Animation</h1>
+  <p>Click an image to trigger animation.</p>
+
+  <div class="image-container">
+    <img id="image1" src="https://images.pexels.com/photos/66898/elephant-cub-tsavo-kenya-66898.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Image 1">
+    <br><br> <hr> 
+    <img id="image2" src="https://images.pexels.com/photos/47547/squirrel-animal-cute-rodents-47547.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Image 2">
+   <br><br><hr>
+    <img id="image3" src="https://images.pexels.com/photos/34098/south-africa-hluhluwe-giraffes-pattern.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Image 3">
+    <br><br> <hr>
+    <img id="image4" src="https://images.pexels.com/photos/247376/pexels-photo-247376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Image 4">
+    <br><br> <hr>
+  </div>
+
+  <script>
+    // Function to animate an image on click
+    function animateImage(event) {
+      const image = event.target;
+      image.classList.add('animate');
+
+      // Remove the animation class after animation duration
+      setTimeout(() => {
+        image.classList.remove('animate');
+      }, 1000);
+
+      // Save the clicked image ID for persistence
+      savePreference('lastClickedImage', image.id);
+    }
+
+    // Function to save user preference in localStorage
+    function savePreference(key, value) {
+      localStorage.setItem(key, value);
+    }
+
+    // Function to retrieve a saved preference from localStorage
+    function getPreference(key) {
+      return localStorage.getItem(key);
+    }
+
+    // Apply click event to all images
+    document.querySelectorAll('.image-container img').forEach(img => {
+      img.addEventListener('click', animateImage);
+    });
+
+    // On page load, check if there's a stored image preference and simulate a click
+    window.addEventListener('load', function () {
+      const lastClicked = getPreference('lastClickedImage');
+      if (lastClicked) {
+        document.getElementById(lastClicked).click();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+body {
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  h1 {
+    margin-bottom: 10px;
+    font-size: 150px;
+    font-style: italic;
+    font-weight: bold;
+    color: #e61c1c;
+  }
+p {
+    font-size: 100px;
+    color: #333;
+  }
+  
+  .image-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  img {
+    width: auto;
+    transition: transform 0.5s ease;
+    cursor: pointer;
+  }
+  
+  @keyframes rotateAndScale {
+    0%   { transform: rotate(0deg) scale(1); }
+    50%  { transform: rotate(180deg) scale(1.2); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+  
+  .animate {
+    animation: rotateAndScale 1s ease-in-out;
+  }
